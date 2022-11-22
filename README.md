@@ -1,16 +1,16 @@
-# FineFood
+# Foody
 A restaurant management system.
 
 ## How to deploy
 - Download the source code
 ```sh
-git clone https://github.com/pythonbrad/finefood.git
-cd finefood
+git clone https://github.com/pythonbrad/foody.git
+cd foody
 ```
 - Create a virtual environment
 ```sh
-python3 -m venv .finefood_venv
-source .finefood_venv/bin/activate
+python3 -m venv .foody_venv
+source .foody_venv/bin/activate
 ```
 - Install the requirements
 ```sh

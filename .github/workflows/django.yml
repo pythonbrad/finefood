@@ -18,8 +18,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: finefood
-          MYSQL_DATABASE: finefood
+          MYSQL_ROOT_PASSWORD: foody
+          MYSQL_DATABASE: foody
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=5
     steps:
     - uses: actions/checkout@v3
@@ -35,9 +35,9 @@ jobs:
       run: |
         echo "allowed_hosts=127.0.0.1,localhost" >> .env
         echo "django_session=django-insecure" >> .env
-        echo "db_name=finefood" >> .env
+        echo "db_name=foody" >> .env
         echo "db_user=root" >> .env
-        echo "db_pass=finefood" >> .env
+        echo "db_pass=foody" >> .env
         echo "db_host=127.0.0.1" >> .env
         echo "db_port=3306" >> .env
     - name: Check the configuration
