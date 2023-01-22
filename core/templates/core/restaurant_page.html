@@ -1,0 +1,207 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-2 mb-2">
+    <div class="row my-2">
+      <a href='#' class="text-decoration-none text-danger category">All categories</a>
+    </div>
+    {% for category in categories %}
+    <div class="row my-2">
+      <a href='#category={{ category.name }}' id="category={{ category.name }}" data-category="{{ category.id }}" class="text-decoration-none text-dark category">{{ category.name|default:"CATEGORY_NAME" }}</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-lg mb-3">
+    {% if restaurant.has_delivery %}
+    <div class="row">
+      <div class="card bg-white">
+        <div class="card-body">
+        {% if request.user.is_authenticated %}
+          {{ contactform|crispy }}
+        {% else %}
+          <p class="text-center text-muted mb-0">
+            Do you want to order?<br>
+            <a href="{% url 'core:login' %}?next={{ request.path }}" class="fw-bold text-body"><u>Login</u></a>
+             or <a href="{% url 'core:signin' %}?next={{ request.path }}" class="fw-bold text-body"><u>Create an account</u></a>
+          </p>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="row mt-1">
+      {% include 'core/restaurant_info.html' %}
+    </div>
+    <div class="row mt-1">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <a href="#panel=menu" class="fw-bold text-danger text-decoration-none panel" id="panel=menu" data-panel="menu">Menu</a>
+            </div>
+            <div class="col">
+              <a href="#panel=reviews" class="fw-bold text-dark text-decoration-none panel" id="panel=reviews" data-panel="reviews">Reviews</a>
+            </div>
+            <div class="col">
+              <a href="#panel=info" class="fw-bold text-dark text-decoration-none panel" id="panel=info" data-panel="info">Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="card">
+        <div class="card-body">
+          <div class="panel-item" data-panel="menu">
+            {% for menu in restaurant.computed_info.menus %}
+              <div class="row">
+                <span class="fw-bold">{{ menu.name|default:"MENU_NAME" }}</span>
+              </div>
+              <hr size="#">
+              {% for item in menu.items.filter %}
+              <div class="category-item" data-category="{{ item.category.id }}">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="row">
+                      <span>{{ item.name|default:"ITEM_NAME" }}</span>
+                    </div>
+                    <div class="row">
+                      <span class="text-muted">{{ item.description|default:"ITEM_DESCRIPTION" }}</span>
+                    </div>
+                    <div class="row"></div>
+                  </div>
+                  <div class="col-sm text-sm-end">
+                    <span>
+                      <span class="fw-bold small">
+                        {{ item.price|intcomma|default_if_none:"ITEM_PRICE" }} {{ restaurant.base_currency|default:"RESTAURANT_BASE_CURRENCY" }}
+                      </span>
+                      {% if request.user.is_authenticated and restaurant.has_delivery %}
+                      &nbsp;<i class="fa fa-square-plus text-muted" id="add-item={{ item.id }}" onclick='window.location.href="?add_item={{ item.id }}#add-item={{ item.id }}"'></i>
+                      {% endif %}
+                    </span>
+                  </div>
+                </div>
+                  {% if not forloop.last %}
+                <hr size="#">
+                  {% endif %}
+              </div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+          <div class="panel-item" data-panel="reviews" hidden>
+            {% for review in reviews %}
+            <div class="row">
+              <span class="fw-bold">{{ review.customer.username }}</span>
+            </div>
+            <hr size="#">
+              <span class="fw-italic">
+                {{ review.content }}
+              </span>
+              {% if not forloop.last %}
+            <hr size="#">
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    {% if request.user.is_authenticated and restaurant.has_delivery %}
+    <div class="card">
+      <div class="card-body">
+        <div class="row text-center">
+          <span class="fw-bold">{{ order|default:"ORDER_NAME" }}</span>
+        </div>
+        <hr size="#">
+        <div class="row bg-secondary bg-opacity-25 rounded mx-1 mb-3 py-1">
+          <span class="text-center fw-bold">Option</span>
+        </div>
+        <div class="row mx-1 mb-3">
+          <div class="col bg-secondary bg-opacity-{% if order.option == 'd' %}50{% else %}25{% endif %} rounded-start py-1" id="set-delivery" onclick='window.location.href="?option=d#set-delivery"'>
+            <div class="row m-auto">
+              <span class="fw-bold">Delivery</span>
+            </div>
+            <div class="row m-auto">
+              <span>in {{ restaurant.delivery_delay|default:"DELIVERY_DELAY" }} min</span>
+            </div>
+          </div>
+          <div class="col bg-secondary bg-opacity-{% if order.option == 'p' %}50{% else %}25{% endif %} rounded-end py-1" id="set-pickup" onclick='window.location.href="?option=p#set-pickup"'>
+            <div class="row m-auto">
+              <span class="fw-bold">Pick-up</span>
+            </div>
+            <div class="row m-auto">
+              <span>in {{ restaurant.pickup_delay|default:"PICKUP_DELAY" }} min</span>
+            </div>
+          </div>
+        </div>
+        {% for orderitem in order.orderitem_set.filter %}
+          {% if forloop.first %}
+        <hr size="#">
+          {% endif %}
+        <div class="row mt-2">
+          <div class="col-sm">
+            <i class="fa fa-minus-square text-muted" id="remove-item={{ orderitem.id }}" onclick='window.location.href="?remove_item={{ orderitem.id }}#remove-item={{ orderitem.id }}"'></i>&nbsp;
+            <span class="fw-bold">{{ orderitem.quantity|default_if_none:"ORDER_ITEM_QUANTITY" }} x</span> {{ orderitem.item|default:"ORDER_ITEM" }}
+          </div>
+          <div class="col-sm text-sm-end">
+            <span>{{ orderitem.unit_price|intcomma|default_if_none:"ORDER_ITEM_PRICE" }} {{ restaurant.base_currency|default:"RESTAURANT_BASE_CURRENCY" }}</span>
+          </div>
+        </div>
+        {% endfor %}
+        <hr size="#">
+        <div class="row">
+          <div class="col-sm">
+            <span class="text-muted">Order Total:</span>
+          </div>
+          <div class="col-sm text-sm-end">
+            <span class="fw-bold">{{ order.total_price|intcomma|default_if_none:"ORDER_TOTAL_PRICE" }} {{ restaurant.base_currency|default:"RESTAURANT_BASE_CURRENCY" }}</span>
+          </div>
+        </div>
+        <div class="row mt-3 mx-2">
+          <a href="#" class="btn btn-danger">Checkout</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    Array.prototype.slice.call(document.querySelectorAll('.category'), 0).forEach(el => {
+      el.addEventListener('focus', () => {
+        Array.prototype.slice.call(document.querySelectorAll('.category'), 0).forEach(category => {
+          if (category.dataset.category == el.dataset.category) {
+            category.classList.replace('text-dark', 'text-danger');
+          } else {
+            category.classList.replace('text-danger', 'text-dark');
+          };
+        });
+        Array.prototype.slice.call(document.querySelectorAll('.category-item'), 0).forEach(item => {
+          item.hidden = (el.dataset.category == null || item.dataset.category == el.dataset.category) ? false : true;
+        });
+      });
+    });
+    Array.prototype.slice.call(document.querySelectorAll('.panel'), 0).forEach(el => {
+      el.addEventListener('focus', () => {
+        Array.prototype.slice.call(document.querySelectorAll('.panel'), 0).forEach(panel => {
+          if (panel.dataset.panel == el.dataset.panel) {
+            panel.classList.replace('text-dark', 'text-danger');
+          } else {
+            panel.classList.replace('text-danger', 'text-dark');
+          };
+        });
+        Array.prototype.slice.call(document.querySelectorAll('.panel-item'), 0).forEach(item => {
+          if (item.dataset.panel == el.dataset.panel) {
+            item.hidden = false;
+          } else {
+            item.hidden = true;
+          };
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}
