@@ -84,7 +84,7 @@ def restaurant_page(request, code):
         'restaurant': restaurant,
         'contactform': contactform,
         'order': order,
-        'reviews': Feedback.objects.filter(entry_ref=restaurant)
+        'reviews': Feedback.objects.filter(entry_ref=restaurant).order_by('-published_date')[:5]
     })
 
 

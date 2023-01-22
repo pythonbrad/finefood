@@ -9,7 +9,7 @@
     </div>
     {% for category in categories %}
     <div class="row my-2">
-      <a href='#category={{ category.name }}' id="category={{ category.name }}" data-category="{{ category.id }}" class="text-decoration-none text-dark category">{{ category.name|default:"CATEGORY_NAME" }}</a>
+      <a href='#category={{ category.name }}' id="category={{ category.name|slugify }}" data-category="{{ category.id }}" class="text-decoration-none text-dark category">{{ category.name|default:"CATEGORY_NAME" }}</a>
     </div>
     {% endfor %}
   </div>
