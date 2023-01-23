@@ -1,0 +1,323 @@
+[{
+    "username": "fody",
+    "email": "fody@example.com",
+    "first_name": "Fody",
+    "last_name": "Cody",
+    "password": "fody@123",
+    "address": "Yaounde",
+    "phone_number": "+237 652 72 70 95",
+    "restaurants": [
+        {
+            "name": "Foody",
+            "description": "Come and Taste",
+            "address": "Cameroon, Buea, Malingo Junction",
+            "working_days": "1111111",
+            "working_hours": "09:30-21:30",
+            "base_currency": "FCFA",
+            "has_delivery": true,
+            "gmt": 1,
+            "menu": {
+                "name": "Menu of Today",
+                "description": "",
+                "items": [
+                    {
+                        "name": "Salad",
+                        "category": "Special",
+                        "price": 500
+                    },
+                    {
+                        "name": "Ata Rice",
+                        "category": "Special",
+                        "price": 5000
+                    },
+                    {
+                        "name": "Fried Rice",
+                        "category": "Special",
+                        "price": 1000
+                    },
+                    {
+                        "name": "Rice and Dodo",
+                        "category": "Simple",
+                        "price": 3000
+                    },
+                    {
+                        "name": "Jollof Rice",
+                        "category": "Simple",
+                        "price": 2000
+                    },
+                    {
+                        "name": "Gari",
+                        "category": "Breakfast",
+                        "price": 500
+                    },
+                    {
+                        "name": "Bread and Egg",
+                        "category": "Breakfast",
+                        "price": 1000
+                    },
+                    {
+                        "name": "Kossam",
+                        "category": "Drink",
+                        "price": 500
+                    },
+                    {
+                        "name": "Natural Juice",
+                        "category": "Drink",
+                        "price": 1000
+                    }
+                ]
+            },
+            "waiters": [
+                {
+                    "username": "franck",
+                    "email": "franck@example.com",
+                    "first_name": "Franck",
+                    "last_name": "Lukas",
+                    "password": "franck@123",
+                    "address": "Buea",
+                    "phone_number": "+237 654 32 10 98"
+                },
+                {
+                    "username": "jobiss",
+                    "email": "jobiss@example.com",
+                    "first_name": "Job",
+                    "last_name": "Iss",
+                    "password": "jobiss@123",
+                    "address": "Buea",
+                    "phone_number": "+237 789 45 61 23"
+                }
+            ],
+            "managers": [],
+            "chefs": [
+                {
+                    "username": "stephan",
+                    "email": "stephan@example.com",
+                    "first_name": "Stephan",
+                    "last_name": "Leo",
+                    "password": "stephan@123",
+                    "address": "Buea",
+                    "phone_number": "+237 654 32 10 98"
+                }
+            ],
+            "feedbacks": [
+                {
+                    "customer": {
+                        "username": "teo",
+                        "email": "teo@example.com",
+                        "first_name": "Teo",
+                        "last_name": "Teo",
+                        "password": "teo@123",
+                        "address": "Douala",
+                        "phone_number": "+237 231 54 67 99"
+                    },
+                    "content": "The place to be!"
+                },
+                {
+                    "customer": {
+                        "username": "kofi",
+                        "email": "kofi@example.com",
+                        "first_name": "Kofi",
+                        "last_name": "Elambi",
+                        "password": "kofi@123",
+                        "address": "Yaounde",
+                        "phone_number": "+237 987 65 43 21"
+                    },
+                    "content": "J'aime la cuisine"
+                },
+                {
+                    "customer": {
+                        "username": "alan",
+                        "email": "alan@example.com",
+                        "first_name": "Alan",
+                        "last_name": "Alan",
+                        "password": "alan@123",
+                        "address": "Douala",
+                        "phone_number": "+237 222 45 78 96"
+                    },
+                    "content": "Good!"
+                }
+            ]
+        },
+        {
+            "name": "Cooky",
+            "description": "The best cookies",
+            "address": "Cameroon, Yaounde, Commissariat Odza",
+            "working_days": "0111101",
+            "working_hours": "09:30-18:30",
+            "base_currency": "FCFA",
+            "has_delivery": false,
+            "gmt": 1,
+            "menu": {
+                "name": "Menu of Today",
+                "description": "",
+                "items": [
+                    {
+                        "name": "French Cookies",
+                        "category": "Special",
+                        "price": 500
+                    },
+                    {
+                        "name": "English Cookies",
+                        "category": "Special",
+                        "price": 1000
+                    },
+                    {
+                        "name": "Kossam",
+                        "category": "Drink",
+                        "price": 500
+                    },
+                    {
+                        "name": "Yogurt",
+                        "category": "Drink",
+                        "price": 1000
+                    }
+                ]
+            },
+            "waiters": [
+                {
+                    "username": "lorem",
+                    "email": "lorem@example.com",
+                    "first_name": "Lorem",
+                    "last_name": "Meros",
+                    "password": "lorem@123",
+                    "address": "Yaounde",
+                    "phone_number": "+237 655 44 21 23"
+                },
+                {
+                    "username": "ipsum",
+                    "email": "ipsum@example.com",
+                    "first_name": "Ipsum",
+                    "last_name": "Issu",
+                    "password": "ipsum@123",
+                    "address": "Yaounde",
+                    "phone_number": "+237 678 55 42 21"
+                }
+            ],
+            "managers": [],
+            "chefs": [
+                {
+                    "username": "nadine",
+                    "email": "nadine@example.com",
+                    "first_name": "Nadine",
+                    "last_name": "Nadine",
+                    "password": "nadine@123",
+                    "address": "Yaounde",
+                    "phone_number": "+237 677 45 71 11"
+                }
+            ],
+            "feedbacks": [
+                {
+                    "customer": {
+                        "username": "toko",
+                        "email": "toko@example.com",
+                        "first_name": "Toko",
+                        "last_name": "Tokos",
+                        "password": "toko@123",
+                        "address": "Bertoua",
+                        "phone_number": "+237 656 45 56 22"
+                    },
+                    "content": "Je suis abonne"
+                }
+            ]
+        }
+    ]
+},
+{
+    "username": "malise",
+    "email": "malise@example.com",
+    "first_name": "Malise",
+    "last_name": "Marie",
+    "password": "malise@123",
+    "address": "Ngaroua",
+    "phone_number": "+237 662 65 12 44",
+    "restaurants": [
+        {
+            "name": "Dikalo",
+            "description": "Mangeons vivant!",
+            "address": "Cameroon, Ngaroua",
+            "working_days": "0111101",
+            "working_hours": "09:30-21:30",
+            "base_currency": "FCFA",
+            "has_delivery": true,
+            "gmt": 1,
+            "menu": {
+                "name": "Menu principal",
+                "description": "",
+                "items": [
+                    {
+                        "name": "Poulet plantain fris",
+                        "category": "Special",
+                        "price": 5000
+                    },
+                    {
+                        "name": "Poulet simple",
+                        "category": "Special",
+                        "price": 2000
+                    },
+                    {
+                        "name": "Riz senegalais",
+                        "category": "Special",
+                        "price": 1000
+                    },
+                    {
+                        "name": "Poulet pommes",
+                        "category": "Simple",
+                        "price": 3000
+                    },
+                    {
+                        "name": "Salade",
+                        "category": "Simple",
+                        "price": 1000
+                    },
+                    {
+                        "name": "Jus naturel",
+                        "category": "Boisson",
+                        "price": 1000
+                    },
+                    {
+                        "name": "Kossam",
+                        "category": "Boisson",
+                        "price": 5000
+                    }
+                ]
+            },
+            "waiters": [
+                {
+                    "username": "mohamed",
+                    "email": "mohamed@example.com",
+                    "first_name": "Mohamed",
+                    "last_name": "Bouli",
+                    "password": "mohamed@123",
+                    "address": "Ngaroua",
+                    "phone_number": "+237 665 78 95 11"
+                }
+            ],
+            "managers": [],
+            "chefs": [
+                {
+                    "username": "fatima",
+                    "email": "fatima@example.com",
+                    "first_name": "Fatima",
+                    "last_name": "Bouli",
+                    "password": "fatima@123",
+                    "address": "Ngaroua",
+                    "phone_number": "+237 661 12 12 45"
+                }
+            ],
+            "feedbacks": [
+                {
+                    "customer": {
+                        "username": "koundji",
+                        "email": "koundji@example.com",
+                        "first_name": "Koundji",
+                        "last_name": "La",
+                        "password": "koundji@123",
+                        "address": "Maroua",
+                        "phone_number": "+237 668 89 45 11"
+                    },
+                    "content": "J'aime!"
+                }
+            ]
+        }
+    ]
+}]
