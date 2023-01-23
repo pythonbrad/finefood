@@ -95,6 +95,9 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
+    def __lt__(self, restaurant):
+        return self.computed_notation()['books'] < restaurant.computed_notation()['books']            
+
     def toogle_state(self):
         self.is_active = not self.is_active
         self.save()

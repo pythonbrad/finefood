@@ -12,12 +12,9 @@ from .models import (
 def index(request):
     return render(request, 'core/home.html', {
         'title': 'Home',
-        'restaurants': sorted([
-            (
-                restaurant.computed_notation()['books'], restaurant
-            )
-            for restaurant in Restaurant.objects.filter()
-        ])[-4:][::-1]
+        'restaurants': sorted(
+            [restaurant for restaurant in Restaurant.objects.filter()]
+        )[-4:][::-1]
     })
 
 

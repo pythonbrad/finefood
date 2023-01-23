@@ -32,7 +32,7 @@
     </div>
     <div class="row">&nbsp;</div>
     <div class="row ms-auto">
-      {% for _, restaurant in restaurants %}
+      {% for restaurant in restaurants %}
       <div class="col-sm-6 mt-4">
         <a class="text-body text-decoration-none" href="{% url 'core:restaurant_page' restaurant.code %}">
         {% include 'core/restaurant_info.html' with short=True %}
