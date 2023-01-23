@@ -68,11 +68,11 @@ class Restaurant(models.Model):
         default=False, verbose_name='Delivery and Pick-up available?'
     )
     delivery_delay = models.PositiveSmallIntegerField(
-        default=15,
+        default=30,
         help_text='Delay in min'
     )
     pickup_delay = models.PositiveSmallIntegerField(
-        default=15,
+        default=30,
         help_text='Delay in min'
     )
     gmt = models.IntegerField(
@@ -246,7 +246,7 @@ class Order(models.Model):
     )
     total_price = models.FloatField(default=0)
     status = models.CharField(
-        choices=ORDER_STATUS, max_length=1, default=''
+        choices=ORDER_STATUS, max_length=1, default='d'
     )
     ordered_date = models.DateTimeField(default=timezone.now)
     items = models.ManyToManyField(Item, through='OrderItem')
@@ -257,7 +257,7 @@ class Order(models.Model):
         on_delete=models.CASCADE, related_name='+'
     )
     option = models.CharField(
-        choices=ORDER_OPTIONS, max_length=1, default='d'
+        choices=ORDER_OPTIONS, max_length=1, default=''
     )
     updated_date = models.DateTimeField(default=timezone.now)
 
