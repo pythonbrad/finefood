@@ -78,7 +78,7 @@
                         {{ item.price|intcomma|default_if_none:"ITEM_PRICE" }} {{ restaurant.base_currency|default:"RESTAURANT_BASE_CURRENCY" }}
                       </span>
                       {% if request.user.is_authenticated and restaurant.has_delivery %}
-                      &nbsp;<i class="fa fa-square-plus text-muted" id="add-item={{ item.id }}" onclick='window.location.href="?add_item={{ item.id }}#add-item={{ item.id }}"'></i>
+                      &nbsp;<i class="fa fa-square-plus fa-2x text-muted" id="add-item={{ item.id }}" onclick='window.location.href="?add_item={{ item.id }}"'></i>
                       {% endif %}
                     </span>
                   </div>
@@ -120,7 +120,7 @@
           <span class="text-center fw-bold">Option</span>
         </div>
         <div class="row mx-1 mb-3">
-          <div class="col bg-secondary bg-opacity-{% if order.option == 'd' %}50{% else %}25{% endif %} rounded-start py-1" id="set-delivery" onclick='window.location.href="?option=d#set-delivery"'>
+          <div class="col bg-secondary bg-opacity-{% if order.option == 'd' %}50{% else %}25{% endif %} rounded-start py-1" id="set-delivery" onclick='window.location.href="?option=d"'>
             <div class="row m-auto">
               <span class="fw-bold">Delivery</span>
             </div>
@@ -128,7 +128,7 @@
               <span>in {{ restaurant.delivery_delay|default:"DELIVERY_DELAY" }} min</span>
             </div>
           </div>
-          <div class="col bg-secondary bg-opacity-{% if order.option == 'p' %}50{% else %}25{% endif %} rounded-end py-1" id="set-pickup" onclick='window.location.href="?option=p#set-pickup"'>
+          <div class="col bg-secondary bg-opacity-{% if order.option == 'p' %}50{% else %}25{% endif %} rounded-end py-1" id="set-pickup" onclick='window.location.href="?option=p"'>
             <div class="row m-auto">
               <span class="fw-bold">Pick-up</span>
             </div>
@@ -143,7 +143,7 @@
           {% endif %}
         <div class="row mt-2">
           <div class="col-sm">
-            <i class="fa fa-minus-square text-muted" id="remove-item={{ orderitem.id }}" onclick='window.location.href="?remove_item={{ orderitem.id }}#remove-item={{ orderitem.id }}"'></i>&nbsp;
+            <i class="fa fa-minus-square fa-2x text-muted" id="remove-item={{ orderitem.id }}" onclick='window.location.href="?remove_item={{ orderitem.id }}"'></i>&nbsp;
             <span class="fw-bold">{{ orderitem.quantity|default_if_none:"ORDER_ITEM_QUANTITY" }} x</span> {{ orderitem.item|default:"ORDER_ITEM" }}
           </div>
           <div class="col-sm text-sm-end">
@@ -175,6 +175,7 @@
         Array.prototype.slice.call(document.querySelectorAll('.category'), 0).forEach(category => {
           if (category.dataset.category == el.dataset.category) {
             category.classList.replace('text-dark', 'text-danger');
+            sessionStorage.setItem('next_view', el.href);
           } else {
             category.classList.replace('text-danger', 'text-dark');
           };
@@ -189,6 +190,7 @@
         Array.prototype.slice.call(document.querySelectorAll('.panel'), 0).forEach(panel => {
           if (panel.dataset.panel == el.dataset.panel) {
             panel.classList.replace('text-dark', 'text-danger');
+            sessionStorage.setItem('next_view', el.href);
           } else {
             panel.classList.replace('text-danger', 'text-dark');
           };
@@ -202,6 +204,9 @@
         });
       });
     });
+    if (sessionStorage.next_view.startsWith(window.location.origin+window.location.pathname)) {
+      window.location = sessionStorage.next_view.toLowerCase();
+    }
   });
 </script>
 {% endblock %}
