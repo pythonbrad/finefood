@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SigninForm, LoginForm, ContactForm
 from django.contrib.auth import login as _login, logout as _logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import (
-    Category, Restaurant, Order, User, Feedback
+    Category, Restaurant, Order, Feedback
 )
 
 
@@ -20,18 +21,16 @@ def index(request):
     })
 
 
-@login_required
 def restaurants_list(request):
+    keyword = request.GET.get('q', None)
+    if keyword:
+        restaurants = Restaurant.objects.filter(
+            Q(code__iexact=keyword) | Q(address__icontains=keyword) | Q(name__icontains=keyword))
+    else:
+        restaurants = Restaurant.objects.filter()
     return render(request, 'core/restaurants_list.html', {
-        'restaurants': Restaurant.objects.filter()
-    })
-
-
-@login_required
-def restaurants_of(request, owner):
-    return render(request, 'core/restaurants_list.html', {
-        'restaurants': Restaurant.objects.filter(
-                owner=get_object_or_404(User, username=owner))
+        'restaurants': restaurants,
+        'keyword': keyword or '',
     })
 
 

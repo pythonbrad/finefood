@@ -19,14 +19,7 @@
         </span>
       </div>
       <div class="row">&nbsp;</div>
-      <div class="row">
-        <div class="col">
-          <input type="text" class="form-control" name="search" placeholder="Enter an restaurant address/code">
-        </div>
-        <div class="col-4">
-          <input type="submit" value="Find" class="btn btn-danger">
-        </div>
-      </div>
+      {% include 'core/search_restaurant.html' %}
     </div>
   </div>
   <div class="row mt-5">&nbsp;</div>
@@ -40,7 +33,7 @@
     <div class="row">&nbsp;</div>
     <div class="row ms-auto">
       {% for _, restaurant in restaurants %}
-      <div class="col-sm-6 text-center mt-4">
+      <div class="col-sm-6 mt-4">
         <a class="text-body text-decoration-none" href="{% url 'core:restaurant_page' restaurant.code %}">
         {% include 'core/restaurant_info.html' with short=True %}
         </a>
