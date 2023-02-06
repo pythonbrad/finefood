@@ -275,7 +275,6 @@ class Order(models.Model):
             )[0]
             order_item.quantity += 1
             order_item.save()
-            self.total_price += order_item.unit_price
             self.refresh_total_price()
         else:
             pass
@@ -287,7 +286,6 @@ class Order(models.Model):
         if _.exists():
             order_item = _[0]
             order_item.quantity -= 1
-            self.total_price -= order_item.unit_price
             if order_item.quantity < 1:
                 order_item.delete()
             else:
