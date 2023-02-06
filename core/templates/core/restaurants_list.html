@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg">
+    {% include 'core/search_restaurant.html' %}
+    {% for restaurant in restaurants %}
+      <div class="row mt-2">
+        <a class="text-body text-decoration-none" href="{% url 'core:restaurant_page' restaurant.code %}">
+        {% include 'core/restaurant_info.html' with short=True %}
+        </a>
+      </div>
+    {% empty %}
+      <div class="row text-center">
+        <span>Nothing found!</span>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+{% endblock %}
